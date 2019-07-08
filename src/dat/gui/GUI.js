@@ -32,7 +32,7 @@ css.inject(styleSheet);
 /** @ignore Outer-most className for GUI's */
 const CSS_NAMESPACE = 'dg';
 
-const HIDE_KEY_CODE = 72;
+const HIDE_KEY_CODE = 33;
 
 /** @ignore The only value shared between the JS and SCSS. Use caution. */
 const CLOSE_BUTTON_HEIGHT = 20;
@@ -478,6 +478,7 @@ GUI.TEXT_CLOSED = 'Close Controls';
 GUI.TEXT_OPEN = 'Open Controls';
 
 GUI._keydownHandler = function(e) {
+  return false;
   if (document.activeElement.type !== 'text' &&
     (e.which === HIDE_KEY_CODE || e.keyCode === HIDE_KEY_CODE)) {
     GUI.toggleHide();
