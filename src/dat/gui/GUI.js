@@ -478,6 +478,7 @@ GUI.TEXT_CLOSED = 'Close Controls';
 GUI.TEXT_OPEN = 'Open Controls';
 
 GUI._keydownHandler = function(e) {
+  return false;
   if (document.activeElement.type !== 'text' &&
     (e.which === HIDE_KEY_CODE || e.keyCode === HIDE_KEY_CODE)) {
     GUI.toggleHide();
