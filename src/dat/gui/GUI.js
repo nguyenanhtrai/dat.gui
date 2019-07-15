@@ -32,7 +32,7 @@ css.inject(styleSheet);
 /** @ignore Outer-most className for GUI's */
 const CSS_NAMESPACE = 'dg';
 
-const HIDE_KEY_CODE = 33;
+const HIDE_KEY_CODE = 72;
 
 /** @ignore The only value shared between the JS and SCSS. Use caution. */
 const CLOSE_BUTTON_HEIGHT = 20;
