@@ -100,7 +100,7 @@ class NumberControllerBox extends NumberController {
     // }
 
     this.__input = document.createElement('input');
-    this.__input.setAttribute('type', 'number');
+    this.__input.setAttribute('type', 'text');
 
     // Makes it so manually specified values are not truncated.
 
@@ -111,18 +111,27 @@ class NumberControllerBox extends NumberController {
     // dom.bind(this.__input, 'mousedown', onMouseDown);
     dom.bind(this.__input, 'keydown', function(e) {
       // When pressing enter, you can be as precise as you want.
-      if (e.keyCode === 13) {
+      const keyCode = e.keyCode || e.which;
+      if (keyCode === 13) {
         _this.__truncationSuspended = true;
         this.blur();
         _this.__truncationSuspended = false;
         onFinish();
+      }
+      if (!(keyCode === 8 || keyCode === 109 || keyCode === 107 ||
+        keyCode === 110 || keyCode === 187 || keyCode === 189 ||
+        keyCode === 190 || keyCode === 37 || keyCode === 39 || keyCode === 46 ||
+        (keyCode >= 48 && keyCode <= 57) || (keyCode >= 96 && keyCode <= 105))
+      ) {
+        e.returnValue = false;
+        if (e.preventDefault) e.preventDefault();
       }
     });
     dom.bind(this.__input, 'focusout', function (e) {
       if (!e.target.value) {
         _this.__input.value = _this.getValue();
       }
-    })
+    });
 
     this.updateDisplay();
 
@@ -130,7 +139,7 @@ class NumberControllerBox extends NumberController {
   }
 
   updateDisplay() {
-    this.__input.value = this.__truncationSuspended ? this.getValue() : roundToDecimal(this.getValue(), this.__precision);
+    this.__input.value = roundToDecimal(this.getValue(), this.__precision);
     return super.updateDisplay();
   }
 }
