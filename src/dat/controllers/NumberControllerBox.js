@@ -68,7 +68,8 @@ class NumberControllerBox extends NumberController {
 
     function onFinish() {
       if (_this.__onFinishChange) {
-        _this.__onFinishChange.call(_this, _this.getValue());
+        const value = _this.getValue().toFixed(2);
+        _this.__onFinishChange.call(_this, value);
       }
     }
 
@@ -129,7 +130,8 @@ class NumberControllerBox extends NumberController {
     });
     dom.bind(this.__input, 'focusout', function (e) {
       if (!e.target.value) {
-        _this.__input.value = _this.getValue();
+        const value = _this.getValue()
+        _this.__input.value = roundToDecimal(value, 2);
       }
     });
 
